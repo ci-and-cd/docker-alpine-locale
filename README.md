@@ -2,6 +2,10 @@
 
 Alpine locale and timezone setting for multi-stage docker image build.
 
+Dockerfile [ci-and-cd/docker-alpine-locale on Github](https://github.com/ci-and-cd/docker-alpine-locale)
+
+[cirepo/alpine-locale on Docker Hub](https://hub.docker.com/r/cirepo/alpine-locale/)
+
 ## Use this image as a “stage” in multi-stage builds
 
 ```dockerfile

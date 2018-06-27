@@ -37,4 +37,4 @@ IMAGE_NAME=${IMAGE_PREFIX:-cirepo}/alpine-locale
 if [ "${TRAVIS_BRANCH}" != "master" ]; then IMAGE_TAG=${IMAGE_TAG}-SNAPSHOT; fi
 
 docker build -t ${IMAGE_NAME}:${IMAGE_TAG} .
-#docker push ${IMAGE_NAME}:${IMAGE_TAG}
+docker push ${IMAGE_NAME}:${IMAGE_TAG}
