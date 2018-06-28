@@ -30,11 +30,20 @@ done
 LAST_LAYER=$(find /tmp/builder -name "timezone" | grep "/etc/timezone" | awk -F'/' '{print $4}')
 echo LAST_LAYER ${LAST_LAYER}
 
-#tar cf ${WORK_DIR}/data/fonts_locale_tz.tar -C /tmp/builder/${LAST_LAYER}/layer .
-# ignore empty directories
-#(cd /tmp/builder/${LAST_LAYER}/layer && find . -type f -print0 | sed -z 's#^.##' | sed -z 's#^/##' | xargs -0 tar --no-recursion -cvf ${WORK_DIR}/data/glibc.tar)
-cp -f /tmp/builder/${LAST_LAYER}/layer.tar data/fonts_locale_tz.tar
-#mkdir -p data/fonts_locale_tz && tar xf data/fonts_locale_tz.tar -C data/fonts_locale_tz
+#tar cf ${WORK_DIR}/data/layer.tar -C /tmp/builder/${LAST_LAYER}/layer .
+cp -f /tmp/builder/${LAST_LAYER}/layer.tar data/layer.tar
+# remove apk settings, database and cache from archive
+for element in $(tar -tf data/layer.tar | grep -E '/apk(/)?.*/$' | sort -r -n); do
+    tar --delete -f data/layer.tar "${element}" > /dev/null 2>&1 || echo error on delete ${element}
+done
+# remove empty directories
+#tar --delete -f data/layer.tar 'tmp'
+for directory in $(tar tf data/layer.tar | grep -E '.*/$' | sort -r -n); do
+    if [ -z "$(tar -tf data/layer.tar | grep -E "${directory}.+")" ]; then
+        echo directory ${directory} in tarball is empty;
+        tar --delete -f data/layer.tar "${directory}" > /dev/null 2>&1 || echo error on delete ${directory}
+    fi
+done
 
 IMAGE_NAME=${IMAGE_PREFIX:-cirepo}/alpine-locale
 

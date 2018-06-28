@@ -10,6 +10,6 @@ Dockerfile [ci-and-cd/docker-alpine-locale on Github](https://github.com/ci-and-
 
 ```dockerfile
 FROM alpine:3.7
-COPY --from=cirepo/alpine-locale:3.7_C.UTF-8_Etc.UTC /data/fonts_locale_tz.tar /data/fonts_locale_tz.tar
-RUN tar xf /data/fonts_locale_tz.tar -C /
+COPY --from=cirepo/alpine-locale:3.7_C.UTF-8_Etc.UTC /data/layer.tar /data/layer.tar
+RUN tar xf /data/layer.tar -C /
 ```
