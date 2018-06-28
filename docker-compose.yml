@@ -1,15 +1,22 @@
 
 version: '2.1'
 services:
-  java-8-oracle:
+  #docker-compose build builder
+  builder:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile_builder
       args:
       - IMAGE_ARG_ALPINE_MIRROR=${IMAGE_ARG_ALPINE_MIRROR:-mirror.tuna.tsinghua.edu.cn}
       - IMAGE_ARG_LOCALE=${IMAGE_ARG_LOCALE:-C.UTF-8}
       - IMAGE_ARG_TZ=${IMAGE_ARG_TZ:-UTC+8:00}
       - IMAGE_ARG_TZ_AREA=${IMAGE_ARG_TZ_AREA:-Asia}
       - IMAGE_ARG_TZ_ZONE=${IMAGE_ARG_TZ_ZONE:-Shanghai}
+    image: ${IMAGE_PREFIX:-tmp}/builder:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}
+  #docker-compose build alpine-locale
+  alpine-locale:
+    build:
+      context: .
+      dockerfile: Dockerfile
 
     image: ${IMAGE_PREFIX:-cirepo}/alpine-locale:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}
