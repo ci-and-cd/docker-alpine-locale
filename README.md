@@ -9,7 +9,8 @@ Dockerfile [ci-and-cd/docker-alpine-locale on Github](https://github.com/ci-and-
 ## Use this image as a “stage” in multi-stage builds
 
 ```dockerfile
+
 FROM alpine:3.7
-COPY --from=cirepo/alpine-locale:3.7_C.UTF-8_Etc.UTC /data/layer.tar /data/layer.tar
-RUN tar xf /data/layer.tar -C /
+COPY --from=cirepo/alpine-locale:3.7_C.UTF-8_Etc.UTC-archive /data/root /
+
 ```

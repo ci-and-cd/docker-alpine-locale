@@ -14,6 +14,9 @@ ARG IMAGE_ARG_TZ_AREA
 ARG IMAGE_ARG_TZ_ZONE
 
 
+COPY --chown=root:root docker /data
+
+
 RUN set -ex \
     && echo ===== Set locale ===== \
     && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/v3.7/main" > /etc/apk/repositories \

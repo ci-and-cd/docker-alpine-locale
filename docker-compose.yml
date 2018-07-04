@@ -1,22 +1,27 @@
 
 version: '2.1'
 services:
-  #docker-compose build builder
-  builder:
+  #docker-compose build image
+  image:
     build:
-      context: .
-      dockerfile: Dockerfile_builder
+      context: image
+      dockerfile: Dockerfile
       args:
       - IMAGE_ARG_ALPINE_MIRROR=${IMAGE_ARG_ALPINE_MIRROR:-mirror.tuna.tsinghua.edu.cn}
       - IMAGE_ARG_LOCALE=${IMAGE_ARG_LOCALE:-C.UTF-8}
       - IMAGE_ARG_TZ=${IMAGE_ARG_TZ:-UTC+8:00}
       - IMAGE_ARG_TZ_AREA=${IMAGE_ARG_TZ_AREA:-Asia}
       - IMAGE_ARG_TZ_ZONE=${IMAGE_ARG_TZ_ZONE:-Shanghai}
-    image: ${IMAGE_PREFIX:-tmp}/builder:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}
-  #docker-compose build alpine-locale
-  alpine-locale:
+    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-alpine-locale}:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}
+  #docker-compose build dumper
+  dumper:
+    build:
+      context: dumper
+      dockerfile: Dockerfile_dumper
+    image: tmp/dumper:latest
+  #docker-compose build archive
+  archive:
     build:
       context: .
-      dockerfile: Dockerfile
-
-    image: ${IMAGE_PREFIX:-cirepo}/alpine-locale:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}
+      dockerfile: Dockerfile_archive
+    image: ${IMAGE_PREFIX:-cirepo}/${IMAGE_NAME:-alpine-locale}:${IMAGE_TAG:-3.7-zh_CN-Asia_Shanghai}-archive

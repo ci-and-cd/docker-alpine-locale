@@ -2,7 +2,8 @@
 *
 
 # But not these files...
-!.gitignore
+!/.gitignore
+!/dump.sh
 # etc...
 
 # ...even if they are in subdirectories
