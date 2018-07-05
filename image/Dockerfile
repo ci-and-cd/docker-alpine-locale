@@ -1,8 +1,6 @@
 
 FROM alpine:3.7
 
-MAINTAINER haolun
-
 
 ARG IMAGE_ARG_ALPINE_MIRROR
 
