@@ -28,3 +28,7 @@ RUN set -ex \
     && apk del tzdata \
     && rm -rf /etc/apk/* /tmp/* /var/cache/apk/*
 #    && rm -rf /lib/apk/db
+
+
+ENV LANG ${IMAGE_ARG_LOCALE:-en_US}.${IMAGE_ARG_ENCODING:-UTF-8}
+ENV LC_ALL ${IMAGE_ARG_LOCALE:-en_US}.${IMAGE_ARG_ENCODING:-UTF-8}

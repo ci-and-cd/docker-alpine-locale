@@ -19,11 +19,11 @@ if [[ "$(docker images -q ${IMAGE_PREFIX}/${IMAGE_NAME}:${IMAGE_TAG} 2> /dev/nul
     docker-compose build image
 fi
 
-## Build dumper image
+# Build dumper image
 docker save ${IMAGE_PREFIX}/${IMAGE_NAME}:${IMAGE_TAG} > dumper/docker/image.tar
 docker-compose build dumper
 
-## Build archive image
+# Build archive image
 docker-compose build archive
 
 docker-compose push image
