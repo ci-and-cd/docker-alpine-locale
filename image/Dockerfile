@@ -5,8 +5,9 @@ FROM alpine:3.7
 ARG IMAGE_ARG_ALPINE_MIRROR
 
 ARG IMAGE_ARG_ENCODING
+ARG IMAGE_ARG_LANGUAGE
 ARG IMAGE_ARG_LOCALE
-
+ARG IMAGE_ARG_REGION
 ARG IMAGE_ARG_TZ
 ARG IMAGE_ARG_TZ_AREA
 ARG IMAGE_ARG_TZ_ZONE
@@ -24,7 +25,7 @@ RUN set -ex \
     && cp /usr/share/zoneinfo/${IMAGE_ARG_TZ_AREA:-Etc}/${IMAGE_ARG_TZ_ZONE:-UTC} /etc/localtime \
     && echo "${IMAGE_ARG_TZ_AREA:-Etc}/${IMAGE_ARG_TZ_ZONE:-UTC}" > /etc/timezone \
     && echo "${IMAGE_ARG_TZ:-UTC+0:00}" > /etc/TZ \
-    && echo "export LANG=${IMAGE_ARG_LOCALE:-C}.${IMAGE_ARG_ENCODING:-UTF-8}" > /etc/profile.d/locale.sh \
+    && echo "export LANG=${IMAGE_ARG_LOCALE:-en_US}.${IMAGE_ARG_ENCODING:-UTF-8}" > /etc/profile.d/locale.sh \
     && apk del tzdata \
     && rm -rf /etc/apk/* /tmp/* /var/cache/apk/*
 #    && rm -rf /lib/apk/db
