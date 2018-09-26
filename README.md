@@ -11,6 +11,6 @@ Dockerfile [ci-and-cd/docker-alpine-locale on Github](https://github.com/ci-and-
 ```dockerfile
 
 FROM alpine:3.7
-COPY --from=cirepo/locale:C.UTF-8_Etc.UTC-alpine-3.7-archive /data/root /
+COPY --from=cirepo/locale:C.UTF-8_Etc.UTC-alpine-3.8-archive /data/root /
 
 ```
