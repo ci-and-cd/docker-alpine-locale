@@ -1,5 +1,5 @@
 
-FROM alpine:3.8
+FROM alpine:3.9
 
 
 ARG IMAGE_ARG_ALPINE_MIRROR
@@ -18,8 +18,8 @@ COPY --chown=root:root docker /data
 
 RUN set -ex \
     && echo ===== Set locale ===== \
-    && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/v3.8/main" > /etc/apk/repositories \
-    && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/v3.8/community" >> /etc/apk/repositories \
+    && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/v3.9/main" > /etc/apk/repositories \
+    && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/v3.9/community" >> /etc/apk/repositories \
     && echo "http://${IMAGE_ARG_ALPINE_MIRROR:-dl-cdn.alpinelinux.org}/alpine/edge/testing/" >> /etc/apk/repositories \
     && apk add --update font-adobe-100dpi tzdata \
     && cp /usr/share/zoneinfo/${IMAGE_ARG_TZ_AREA:-Etc}/${IMAGE_ARG_TZ_ZONE:-UTC} /etc/localtime \
